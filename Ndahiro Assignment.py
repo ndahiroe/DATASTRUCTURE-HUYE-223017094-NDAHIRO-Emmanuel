@@ -9,9 +9,9 @@ class Donation:
 
 class DonationManager:
     def __init__(self):
-        self.donations = []  # Stack for undo
-        self.pending_donations = []  # Queue for pending donations
-        self.charities = []  # List for charities
+        self.donations = []  
+        self.pending_donations = []  
+        self.charities = [] 
 
     def add_charity(self, charity_name):
         charity = Charity(charity_name)
@@ -28,7 +28,7 @@ class DonationManager:
 
     def process_donation(self):
         if self.pending_donations:
-            donation = self.pending_donations.pop(0)  # FIFO
+            donation = self.pending_donations.pop(0)  
             self.donations.append(donation)  # Add to stack for undo
             print(f"Processed donation of ${donation.amount} to {donation.charity.name}.")
         else:
@@ -37,7 +37,7 @@ class DonationManager:
     def undo_donation(self):
         if self.donations:
             donation = self.donations.pop()  # LIFO
-            self.pending_donations.insert(0, donation)  # Move back to pending
+            self.pending_donations.insert(0, donation)  
             print(f"Undid donation of ${donation.amount} to {donation.charity.name}.")
         else:
             print("No donations to undo.")
